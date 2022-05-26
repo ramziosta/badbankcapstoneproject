@@ -1,0 +1,160 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "BadBank App",
+    "description": "Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:4000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "BadBank",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+
+  "paths": {
+    "/transactions": {
+      "get": {
+        "tags": ["transactions"],
+        "summary": "Get all transactions in for the user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        }
+      }
+    },
+    "/transaction": {
+      "post": {
+        "tags": ["transactions"],
+        "description": "Create new transaction",
+        "parameters": [
+          {
+            "name": "transaction",
+            "in": "body",
+            "description": "Transaction for the user",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New transactiont is created",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          }
+        }
+      }
+    },
+    "/transaction/{email}": {
+      "parameters": [
+        {
+          "name": "email",
+          "in": "path",
+          "required": true,
+          "description": "Retrieve transaction by user email ",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["transactions"],
+        "summary": "Retrieve user transactions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Transactions"
+            }
+          }
+        }
+      }
+    }
+  },
+  "/register/{user}/{email}/{password}{account number}/{account type}/{created}/": {
+    "parameters": [
+      {
+        "name": "user",
+        "in": "path",
+        "required": true,
+        "description": "User name ",
+        "type": "string"
+      },
+      {
+        "name": "email",
+        "in": "path",
+        "required": true,
+        "description": "User email ",
+        "type": "string"
+      },
+      {
+        "name": "password",
+        "in": "path",
+        "required": true,
+        "description": "Encrypted user password ",
+        "type": "string"
+      },
+      {
+        "name": "account number",
+        "in": "path",
+        "required": true,
+        "description": "Account number ",
+        "type": "string"
+      },
+      {
+        "name": "account type",
+        "in": "path",
+        "required": true,
+        "description": "Account type ",
+        "type": "string"
+      },
+      {
+        "name": "created",
+        "in": "path",
+        "required": true,
+        "description": "Account created date ",
+        "type": "string"
+      }
+    ],
+    "get": {
+      "tags": ["transactions"],
+      "summary": "Retrieve user transactions",
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/Transactions"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

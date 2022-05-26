@@ -1,0 +1,15 @@
+.logo {
+  
+    cursor: pointer;
+    text-decoration: none;
+    
+    
+  }
+  .logo:hover,
+  .nav-link:hover
+  {
+    border-bottom:2px solid #ed2424;
+    border-radius:0px;
+  }
+  
+
